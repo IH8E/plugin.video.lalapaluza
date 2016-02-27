@@ -4,9 +4,11 @@ USER_AGENT = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/
 URL_INDEX='http://www.lalapaluza.ru/'
 
 def HOME():
-        addD(0,'South Park','http://www.sp-fan.ru/episode/','s','')
-        addD(0,'Simpsons','http://www.simp-fan.ru/episode/','s','')
-        addD(0,'Family Guy','http://www.grif-fan.ru/episode/','s','')
+        addD(0,'Южный парк','http://www.sp-fan.ru/episode/','s','')
+        addD(0,'Симпсоны','http://www.simp-fan.ru/episode/','s','')
+        addD(0,'Гриффины','http://www.grif-fan.ru/episode/','s','')
+        addD(0,'Американский Папаша','http://www.dad-fan.ru//episode/','s','')
+        addD(0,'Приграничный Городок','http://www.border-fan.ru/episode/','s','')
 
 def SEASONS(url):
         link = getHtml(url)
@@ -18,7 +20,7 @@ def SEASONS(url):
 def EPISODES(url):
         link = getHtml(url)
         matchurl = re.compile('<div class="ep_block">\s*<a href="(.*)">').findall(link)
-        matchthumb = re.compile('src="(.*.jpg)".*>\s*<table class="episode-name-outer">').findall(link)
+        matchthumb = re.compile('<div class="ep_block">\s*<a href=".*?">\s*<img src="(.*?[.jpg|.png])".*>').findall(link)
         matchname = re.compile('<td class="episode-name">\s*(.*?)\s*</td>').findall(link)
         for urlc,thumb,name in zip(matchurl, matchthumb, matchname):
             addD(1,name, urlc,'l', URL_INDEX+thumb)
@@ -28,9 +30,14 @@ def CHOOSE(url,name):
         href = re.compile('<a href="(.*)" class="video-pleer__nav-act.*">').findall(link)
         names = re.compile('<a href=".*" class="video-pleer__nav-act.*">(.*)</a>').findall(link)
         names[:0] = re.compile('<span class="video-pleer__nav-act nav-act-selected">(.*)</span>').findall(link)
+        subsHref = re.compile('<a href="(.*sub=.*)" class="download" title=".*">').findall(link)
         dialog = xbmcgui.Dialog()
         ret = dialog.select('Выберите озвучку', names)
         if(ret>-1):
+            for s in subsHref:
+                ss=url+s.split('/')[-1]
+                print 'Субтиты',ss
+                xbmc.Player().setSubtitles(ss)
             if(ret==0):
                 newUrl = url
             else: 
