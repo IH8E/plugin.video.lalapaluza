@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<addon id="plugin.video.lalapaluza"
+       name="Lalapaluza"
+       version="0.1.0"
+       provider-name="IH8E">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" provides="video" library="default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>Lalapaluza</summary>
+    <description>
+Южный Парк, Симпсоны, Гриффины, Американский Папаша и Приграничный Городок.
+Lalapaluza — это место, где встречается черный юмор, сатира, стеб и житейская философия.   </description>
+    <platform>all</platform>
+  </extension>
+</addon>
