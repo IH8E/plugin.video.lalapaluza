@@ -55,7 +55,7 @@ def CHOOSE(url, name):
 
 def PLAY(url, name, sub_files=[]):
     link = get_html(url)
-    match = re.compile('var videoFile = mVideoFile = \'(.+?.m3u8)\'').findall(link)
+    match = re.compile('\'(.+?.m3u8)\'').findall(link)
     for u in match:
         listitem = xbmcgui.ListItem(name)
         listitem.setInfo('video', {'Title': name, 'Genre': 'Humor'})
