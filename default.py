@@ -33,7 +33,7 @@ def EPISODES(url):
     matchthumb = re.compile('<div class="ep_block">\s*<a href=".*?">\s*<img src="(.*?[.jpg|.png])".*>').findall(link)
     matchname = re.compile('<td class="episode-name">\s*(.*?)\s*</td>').findall(link)
     for urlc, thumb, name in zip(matchurl, matchthumb, matchname):
-        add_item(X=1, name=format_name(name, urlc), url=urlc, mode='l', thumb=settings.URL_INDEX + thumb)
+        add_item(X=1, name=format_name(name, urlc), url=urlc, mode='l', thumb='http:' + thumb)
 
 
 def CHOOSE(url, name):
